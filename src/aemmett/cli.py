@@ -14,7 +14,7 @@ def run_app():
     required, extra = parser.parse_known_args(sys.argv[1:])
 
     Granian(
-        "emmett_app.rsgi:app",
+        "aemmett.rsgi:app",
         workers=required.wrk,
         threads=required.thr,
         interface=required.interface,

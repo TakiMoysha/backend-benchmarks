@@ -1,5 +1,5 @@
 [project]
-name = "rsgi-lib"
+name = "backend-benchmarks"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
@@ -11,13 +11,17 @@ dependencies = [
     "granian[reload]>=1.7.5",
     "orjson>=3.10.15",
     "returns>=0.24.0",
+    "robyn>=0.53.0",
     "structlog>=25.1.0",
 ]
 
 [project.scripts]
-dev_emmett = "emmett_app.cli:run_app"
-dev_app = "app.cli:run_app"
+dev_granian = "aemmett.cli:run_app"
+dev_robyn = "arobyn.cli:run_app"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.hatch.build]
+packages = ["src/rsgi_lib", "src/shared"]
