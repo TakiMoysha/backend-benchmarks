@@ -39,3 +39,7 @@ benchmark:
 .PHONY: loadtest
 loadtest:
 	k6 run loadtest.js
+
+.PHONY: htserver
+htserver-build:
+	gcc ht/server.c -o api_server
