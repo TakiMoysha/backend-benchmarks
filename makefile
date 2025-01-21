@@ -1,28 +1,41 @@
-.DEFAULT_GOAL := dev
 
-dev: export GRANIAN_THREADS=2
-dev: export	GRANIAN_WORKERS=2
-dev: export GRANIAN_BLOCKING_THREADS=4
-dev: export GRANIAN_INTERFACE=rsgi
+dev-aemmett: export GRANIAN_THREADS=2
+dev-aemmett: export	GRANIAN_WORKERS=2
+dev-aemmett: export GRANIAN_BLOCKING_THREADS=2
+dev-aemmett: export GRANIAN_INTERFACE=rsgi
 
 .PHONY: dev
-dev:
+dev-aemmett:
 	uv run granian src.aemmett.rsgi:app
 
+.PHONY: dev
+dev-arobyn:
+	uv run python src.arobyn.cli:run_app --workers=2 --process=2
+
 .PHONY: build-aemmett
-build-aemmett:
+docker-build-aemmett:
 	docker build -t aemmett -f containers/aemmett.dockerfile .
 
 .PHONY: build-aemmett
-build-arobyn:
+docker-build-arobyn:
 	docker build -t arobyn -f containers/arobyn.dockerfile .
 
-
 .PHONY: stage-aemmett
-stage-aemmett:
-	docker run --rm --cpus 2 --name aemmett-test -p 8000:8000 aemmett-test
+docker-stage-aemmett:
+	docker run --rm --cpus 4 --name aemmett-test -p 8000:8000 aemmett
+
+.PHONY: stage-arobyn
+docker-stage-arobyn:
+	docker run --rm --cpus 4 --name arobyn-test -p 8000:8000 arobyn
 
 .PHONY: stage
-stage:
+stage-eammett:
 	granian aemmett.rsgi:app
 
+.PHONY: benchmark
+benchmark:
+	ab -c 10 -n 100000 http://127.0.0.1:8000/api/orders
+
+.PHONY: loadtest
+loadtest:
+	k6 run loadtest.js

@@ -9,15 +9,14 @@ dependencies = [
     "classes>=0.4.1",
     "emmett>=2.6.3",
     "granian[reload]>=1.7.5",
-    "orjson>=3.10.15",
     "returns>=0.24.0",
-    "robyn>=0.53.0",
+    "robyn>=0.65.0",
     "structlog>=25.1.0",
 ]
 
 [project.scripts]
-dev_granian = "aemmett.cli:run_app"
-dev_robyn = "arobyn.cli:run_app"
+dev_rsgi = "aemmett.cli:run_app"
+dev_rust = "arobyn.cli:run_app"
 
 [build-system]
 requires = ["hatchling"]
