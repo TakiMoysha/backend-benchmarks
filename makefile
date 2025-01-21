@@ -10,14 +10,14 @@ dev-aemmett:
 
 .PHONY: dev
 dev-arobyn:
-	uv run python src.arobyn.cli:run_app --workers=2 --process=2
+	uv run python -m arobyn
 
 .PHONY: build-aemmett
-docker-build-aemmett:
+build-docker-aemmett:
 	docker build -t aemmett -f containers/aemmett.dockerfile .
 
 .PHONY: build-aemmett
-docker-build-arobyn:
+build-docker-arobyn:
 	docker build -t arobyn -f containers/arobyn.dockerfile .
 
 .PHONY: stage-aemmett
