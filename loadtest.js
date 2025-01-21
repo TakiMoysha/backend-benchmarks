@@ -2,16 +2,27 @@ import http from "k6/http";
 import { check } from "k6";
 
 export const options = {
-  scenarios: {
-    constant_request_rate: {
-      executor: "constant-arrival-rate",
-      rate: 30000,
-      timeUnit: "1s",
-      duration: "1m",
-      preAllocatedVUs: 2000,
-      maxVUs: 8000
-    }
-  }
+  stages: [
+    {
+      duration: "10s",
+      target: 1000,
+    },
+    {
+      duration: "10s",
+      target: 10000,
+    },
+    {
+      duration: "10s",
+      target: 500,
+    },
+  ]
+  // scenarios: {
+  //   loadtesting: {
+  //     executor: "shared-iterations",
+  //     vus: 100,
+  //     iterations: 1000
+  //   }
+  // }
 }
 
 export default function () {
