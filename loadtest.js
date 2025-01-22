@@ -1,30 +1,36 @@
 import http from "k6/http";
 import { check } from "k6";
 
-export const options = {
-  scenarios: {
-    stages: [
-      {
-        duration: "10s",
-        target: 1000,
-      },
-      {
-        duration: "20s",
-        target: 30000,
-      },
-      {
-        duration: "10s",
-        target: 500,
-      },
-    ],
+const stage_time = "10s";
+
+const RampingVUs = {
+  discardResponseBodies: true, // keep-alive connections
+
+  tags: {
+    benchmark_runtime: new Date().toISOString(),
+    job_name: 'http-ramping-test',
   },
-  // scenarios: {
-  //   loadtesting: {
-  //     executor: "shared-iterations",
-  //     vus: 100,
-  //     iterations: 1000
-  //   }
-  // }
+
+  scenarios: {
+    contacts: {
+      executor: "ramping-vus",
+      startVUs: 10,
+      gracefulRampDown: "0s",
+      stages: [
+        { duration: stage_time, target: 1000 },
+        { duration: stage_time, target: 3000 },
+        { duration: stage_time, target: 5000 },
+        { duration: stage_time, target: 6000 },
+        { duration: stage_time, target: 8000 },
+        { duration: stage_time, target: 10000 },
+      ],
+    },
+  },
+};
+
+export const options = {
+  ...RampingVUs,
+
 };
 
 export default function () {
