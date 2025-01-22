@@ -2,20 +2,22 @@ import http from "k6/http";
 import { check } from "k6";
 
 export const options = {
-  stages: [
-    {
-      duration: "10s",
-      target: 1000,
-    },
-    {
-      duration: "10s",
-      target: 10000,
-    },
-    {
-      duration: "10s",
-      target: 500,
-    },
-  ]
+  scenarios: {
+    stages: [
+      {
+        duration: "10s",
+        target: 1000,
+      },
+      {
+        duration: "20s",
+        target: 30000,
+      },
+      {
+        duration: "10s",
+        target: 500,
+      },
+    ],
+  },
   // scenarios: {
   //   loadtesting: {
   //     executor: "shared-iterations",
@@ -23,7 +25,7 @@ export const options = {
   //     iterations: 1000
   //   }
   // }
-}
+};
 
 export default function () {
   const res = http.get(`http://127.0.0.1:8000/api/orders`);

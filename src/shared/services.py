@@ -1,5 +1,3 @@
-import orjson
-
 from datetime import datetime
 
 from .models import Order, OrdersPage

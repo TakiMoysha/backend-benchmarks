@@ -54,7 +54,6 @@ void handle_client(int client_socket) {
 
             size_t content_length = strlen(content);
 
-            // Формируем ответ
             char response[BUFFER_SIZE];
             int response_length = snprintf(response, sizeof(response),
                 "HTTP/1.1 200 OK\r\n"
@@ -66,7 +65,6 @@ void handle_client(int client_socket) {
                 "%s", 
                 content_type, content_length, etag, content);
 
-            // Отправляем полный ответ
             write(client_socket, response, response_length);
         } else {
             const char *response = "HTTP/1.1 404 Not Found\r\n"
