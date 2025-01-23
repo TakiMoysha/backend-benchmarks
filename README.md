@@ -15,4 +15,4 @@
 ## References
 
 1. [granian - #Processes and Threads / github.com](https://github.com/emmett-framework/granian?tab=readme-ov-file#processes-and-threads)
-2. []()
+2. [Types of Load Testing / grafana.com](https://grafana.com/load-testing/types-of-load-testing/)

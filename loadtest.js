@@ -15,13 +15,12 @@ const RampingVUs = {
     contacts: {
       executor: "ramping-vus",
       startVUs: 10,
-      gracefulRampDown: "0s",
+      VU: 1000,
+      gracefulStop: "10s",
       stages: [
-        { duration: stage_time, target: 1000 },
         { duration: stage_time, target: 3000 },
         { duration: stage_time, target: 5000 },
-        { duration: stage_time, target: 6000 },
-        { duration: stage_time, target: 8000 },
+        { duration: stage_time, target: 7000 },
         { duration: stage_time, target: 10000 },
       ],
     },
@@ -34,6 +33,6 @@ export const options = {
 };
 
 export default function () {
-  const res = http.get(`http://127.0.0.1:8000/api/orders`);
+  const res = http.get(`http://127.0.0.1:8080/api/orders`);
   check(res, { "status was 200": (r) => r.status == 200 });
 }

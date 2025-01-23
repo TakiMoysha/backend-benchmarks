@@ -1,5 +1,4 @@
-
-dev-aemmett: export GRANIAN_THREADS=2
+dev-aemmett: export GRANIAN_THREADS=4
 dev-aemmett: export	GRANIAN_WORKERS=2
 dev-aemmett: export GRANIAN_BLOCKING_THREADS=2
 dev-aemmett: export GRANIAN_INTERFACE=rsgi
@@ -34,7 +33,7 @@ stage-eammett:
 
 .PHONY: benchmark
 benchmark:
-	ab -c 10 -n 100000 http://127.0.0.1:8000/api/orders
+	ab -c 10 -n 100000 -g reports/raw-data.csv http://127.0.0.1:8000/api/orders 
 
 .PHONY: loadtest
 loadtest:
