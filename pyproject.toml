@@ -25,3 +25,8 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build]
 packages = ["src/rsgi_lib", "src/shared"]
+
+[dependency-groups]
+dev = [
+    "memray>=1.15.0",
+]

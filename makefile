@@ -3,31 +3,39 @@ dev-aemmett: export	GRANIAN_WORKERS=2
 dev-aemmett: export GRANIAN_BLOCKING_THREADS=2
 dev-aemmett: export GRANIAN_INTERFACE=rsgi
 
-.PHONY: dev
+.PHONY: dev-aemmett
 dev-aemmett:
 	uv run granian src.aemmett.rsgi:app
 
-.PHONY: dev
+.PHONY: dev-arobyn
 dev-arobyn:
 	uv run python -m arobyn
 
-.PHONY: build-aemmett
+.PHONY: memray-aemmett
+memray-aemmett:
+	uv run memray run --live -m aemmett aemmett.rsgi:app
+
+.PHONY: memray-arobyn
+memray-arobyn:
+	uv run memray run --live -m arobyn
+
+.PHONY: build-docker-aemmett
 build-docker-aemmett:
 	docker build -t aemmett -f containers/aemmett.dockerfile .
 
-.PHONY: build-aemmett
+.PHONY: build-docker-arobyn
 build-docker-arobyn:
 	docker build -t arobyn -f containers/arobyn.dockerfile .
 
-.PHONY: stage-aemmett
+.PHONY: docker-stage-aemmett
 docker-stage-aemmett:
 	docker run --rm --cpus 4 --name aemmett-test -p 8000:8000 aemmett
 
-.PHONY: stage-arobyn
+.PHONY: docker-stage-arobyn
 docker-stage-arobyn:
 	docker run --rm --cpus 4 --name arobyn-test -p 8000:8000 arobyn
 
-.PHONY: stage
+.PHONY: stage-eammett
 stage-eammett:
 	granian aemmett.rsgi:app
 
