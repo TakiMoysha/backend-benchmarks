@@ -1,5 +1,9 @@
 ## Benchmarks
 
+[ ] HTTP Requests
+[ ] HTTP + schema validation
+
+
 ## Tools
 
 - Check number of available core in your machine `nproc`
