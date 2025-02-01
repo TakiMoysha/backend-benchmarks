@@ -1,7 +1,7 @@
 ## Benchmarks
 
-[ ] HTTP Requests
-[ ] HTTP + schema validation
+* [ ] HTTP Requests
+* [ ] HTTP + schema validation
 
 
 ## Tools
